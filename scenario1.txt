@@ -1,0 +1,6 @@
+Size, 10, 10
+Time, 200
+Station, man_1, 5, 9, 10
+Station, man_2, 3, 9, 10
+Station, del_1, 1, 3
+Transporter, tra_1, 5, 5, man_2, del_1
