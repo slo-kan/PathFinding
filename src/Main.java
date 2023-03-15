@@ -44,22 +44,33 @@ public class Main {
                         try {
                             Class<?> clazz = Class.forName(className);
 
-                            Class<?>[] argTypes = new Class[argsString.length];
-                            Object[] arg = new Object[argsString.length];
-
-                            for (int i = 0; i < argsString.length; i++) {
-                                String argString = argsString[i];
-                                if (isInteger(argString)) {
-                                    argTypes[i] = int.class;
-                                    arg[i] = Integer.parseInt(argString);
+                            List<Station> traStations = new ArrayList<>();
+                            List<String> argsList = new ArrayList<>();
+                            for (String s : argsString) {
+                                if (isInteger(s)) {
+                                    argsList.add(s);
                                 } else {
-                                    argTypes[i] = objects.get(argString).getClass();
-                                    arg[i] = objects.get(argString);
+                                    traStations.add((Station) objects.get(s));
+                                }
+                            }
+                            //if(!traStations.isEmpty())argsList.add(traStations);
+                            int addSize = 0;
+                            if(!traStations.isEmpty()){addSize = 1;}
+
+                            Class<?>[] paraTypes = new Class[argsList.size() + addSize];
+                            Object[] para = new Object[argsList.size() + addSize];
+                            for (int i = 0; i < para.length; i++) {
+                                if(i< argsList.size()) {
+                                    paraTypes[i] = int.class;
+                                    para[i] = Integer.parseInt(argsList.get(i));
+                                }else if (i == argsList.size()){
+                                    paraTypes[i] = List.class;
+                                    para[i] = traStations;
                                 }
                             }
 
-                            Constructor<?> constructor = clazz.getDeclaredConstructor(argTypes);
-                            Object obj = constructor.newInstance(arg);
+                            Constructor<?> constructor = clazz.getDeclaredConstructor(paraTypes);
+                            Object obj = constructor.newInstance(para);
                             // Assign the new object to the variable
                             objects.put(objectName, obj);
                             System.out.println(obj);
@@ -91,6 +102,7 @@ public class Main {
                 }
             }else if (obj instanceof Transporter) {
                 listTransporters.add((Transporter) obj);
+                System.out.println(((Transporter) obj).getStations());
             }
         }
 
@@ -111,6 +123,7 @@ public class Main {
         while (true) {
             evolveGrid(grid);
             out.println(grid.print());
+            //System.out.println(grid.print());
 
             time.increment();
 
@@ -145,7 +158,6 @@ public class Main {
             grid.addNode(transporter);
         }
     }
-
 
 
     /*

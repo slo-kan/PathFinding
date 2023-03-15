@@ -48,10 +48,10 @@ public class Grid {
         cells[node.location.getX()][node.location.getY()].removeNode(node);
     }
 
-    public String getRowAsString(int column) {
+    public String getRowAsString(int row) {
         Cell[] rowCells = new Cell[width];
         for (int i = 0; i < width; i++) {
-            rowCells[i] = cells[i][column];
+            rowCells[i] = cells[row][i];
         }
 
         String out = "";

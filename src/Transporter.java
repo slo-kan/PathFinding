@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Transporter extends Node {
 
     private int waitTime = 2;
@@ -9,17 +12,23 @@ public class Transporter extends Node {
     private Station source;
     private Station destination;
 
+    List<Station> traStations = new ArrayList<>();
+
+    private int index =1;
     public Transporter() {
     }
-    public Transporter(int x, int y, Station source, Station destination) {
+    public Transporter(int x, int y, List<Station> stations) {
         this.location = new Location(x,y);
-        this.source = source;
-        this.destination = destination;
+        this.traStations = stations;
+        this.source = this.traStations.get(0);
+        this.destination = this.traStations.get(0);
     }
 
     public Station getDestination() {
         return destination;
     }
+
+    public List<Station> getStations(){return traStations;}
 
     public void setDestination(Station station) {
         this.destination = station;
@@ -27,22 +36,24 @@ public class Transporter extends Node {
 
     public void setLocation(Location location) {
         if (location.equals(destination.location)) {
-            Station temp = source;
             source = destination;
-            destination = temp;
+            destination = this.traStations.get(index % traStations.size());
             this.location = source.location;
 
             this.wait = shouldWait();
+
             if (this.wait && source.getType() == Station.Type.MANUFACTURE) {
-                this.items = source.items;
+                this.items = this.items + source.items;
                 source.items = 0;
+                index++;
             }
 
         } else if (!wait || (currentlyWaited >= waitTime)) {
             this.location = location;
-            if (source.getType() == Station.Type.DELIVER) {
+            if (this.wait && (source.getType() == Station.Type.DELIVER)) {
                 source.deliver(this.items);
                 this.items = 0;
+                index++;
             }
 
             currentlyWaited = 0;
