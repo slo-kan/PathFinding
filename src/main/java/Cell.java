@@ -1,9 +1,10 @@
+package main.java;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cell {
-    private List<Node> nodes;
+    private final List<Node> nodes;
 
     public Cell() {
         this.nodes = new ArrayList<>();

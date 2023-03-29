@@ -1,3 +1,4 @@
+package main.java;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class Transporter extends Node {
 
     public void setLocation(Location location) {
         if (location.equals(destination.location)) {
+
             source = destination;
             destination = this.traStations.get(index % traStations.size());
             this.location = source.location;

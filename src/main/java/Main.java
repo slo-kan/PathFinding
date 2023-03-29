@@ -1,8 +1,12 @@
+package main.java;
+
 
 //import java.util.Random;
 import java.io.*;
 import java.lang.reflect.Constructor;
 import java.util.*;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -22,6 +26,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Grid grid = null;
+
         if (args.length == 0) {
             System.err.println("Usage: java path_finding <input_file>");
             System.exit(1);
@@ -37,7 +42,7 @@ public class Main {
                     } else if ("Time".equals(tokens[0])) {
                         runTime = Integer.parseInt(tokens[1]);
                     } else{
-                        String className = tokens[0];
+                        String className =  "main.java." + tokens[0];
                         String objectName = tokens[1];
                         String[] argsString = new String[tokens.length - 2];
                         System.arraycopy(tokens, 2, argsString, 0, argsString.length);
@@ -73,8 +78,9 @@ public class Main {
                             Object obj = constructor.newInstance(para);
                             // Assign the new object to the variable
                             objects.put(objectName, obj);
-                            System.out.println(obj);
+                            //System.out.println(obj);
                             grid.addNode((Node) obj);
+
                         } catch (Exception e) {
                             System.err.println("Failed to create object: " + e.getMessage());
                         }
@@ -87,10 +93,10 @@ public class Main {
         }
 
 
-        System.out.println(grid.print());
-        for (Map.Entry<String, Object> entry : objects.entrySet()) {
-            System.out.println(entry.getKey()+" : "+entry.getValue());
-        }
+        //System.out.println(grid.print());
+        //for (Map.Entry<String, Object> entry : objects.entrySet()) {
+        //    System.out.println(entry.getKey()+" : "+entry.getValue());
+        //}
 
         for (Object obj : objects.values()) {
             if (obj instanceof Station) {
@@ -102,7 +108,7 @@ public class Main {
                 }
             }else if (obj instanceof Transporter) {
                 listTransporters.add((Transporter) obj);
-                System.out.println(((Transporter) obj).getStations());
+                //System.out.println(((Transporter) obj).getStations());
             }
         }
 
@@ -118,11 +124,12 @@ public class Main {
 
         FileWriter file = new FileWriter(fileName, true);
         PrintWriter out = new PrintWriter(file, true);
-        out.println("Printing Grid");
-        out.println(grid.print());
+        //out.println("Printing Grid");
+        //out.println(grid.print());
         while (true) {
+            TimeUnit.MILLISECONDS.sleep(100);
             evolveGrid(grid);
-            out.println(grid.print());
+            //out.println(grid.print());
             //System.out.println(grid.print());
 
             time.increment();

@@ -1,3 +1,4 @@
+package main.java;
 
 public class Station extends Node {
     private int GENERATION_TIME = 0;

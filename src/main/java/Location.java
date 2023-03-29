@@ -1,5 +1,4 @@
-
-import java.util.Objects;
+package main.java;
 
 public class Location {
     private int x;
