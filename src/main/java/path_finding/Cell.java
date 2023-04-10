@@ -6,9 +6,7 @@ import java.util.List;
 public class Cell {
     private final List<Node> nodes;
 
-    public Cell() {
-        this.nodes = new ArrayList<>();
-    }
+    public Cell() {this.nodes = new ArrayList<>();}
 
     public Cell(List<Node> nodes) {
         this.nodes = nodes;
@@ -34,6 +32,13 @@ public class Cell {
         for(int i=0; i<nodes.size(); i++ ){
             items += nodes.get(i).items;
         }return items;
+    }
+    public boolean notOccupied(){
+        boolean occupied = false;
+        for (Node node:this.nodes){
+            if(node.getType() == Node.Type.TRANSPORTER){ occupied = true;}
+            else{occupied = false;}
+        }return !occupied;
     }
 
     public String print() {

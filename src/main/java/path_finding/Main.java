@@ -29,6 +29,8 @@ public abstract class Main {
     //private static int genTime = 0;
     //private static final int gridSize = 10;
     //private static final Random random = new Random();
+
+    //public boolean Occupied = false;
     private static final PathFinder pathfinder = new PathFinder();
 
     public static void main(String[] args) throws Exception {
@@ -135,7 +137,7 @@ public abstract class Main {
         //out.println("Printing Grid");
         //out.println(grid.print());
         while (true) {
-            TimeUnit.MILLISECONDS.sleep(100);
+            TimeUnit.MILLISECONDS.sleep(1000);
             evolveGrid(grid);
             //out.println(grid.print());
             //System.out.println(grid.print());
@@ -168,9 +170,11 @@ public abstract class Main {
         }
         for (Transporter transporter : Main.listTransporters) {
             Location newLocation = pathfinder.getNextLocation(transporter.location, transporter.getDestination().location);
-            grid.removeNode(transporter);
-            transporter.setLocation(newLocation);
-            grid.addNode(transporter);
+            if (grid.cells[newLocation.getX()][newLocation.getY()].notOccupied()){
+                grid.removeNode(transporter);
+                transporter.setLocation(newLocation);
+                grid.addNode(transporter);
+            }
         }
     }
 

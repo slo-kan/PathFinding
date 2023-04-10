@@ -14,7 +14,7 @@ public class Grid {
     private int height;
 
     private int pixels = 15;
-    private Cell[][] cells;
+    public Cell[][] cells;
     private JPanel[][] st_panels;
     private JLabel[][] st_labels;
 
@@ -177,6 +177,8 @@ public class Grid {
 
         cells[node.location.getX()][node.location.getY()].removeNode(node);
     }
+
+
 
     public String getRowAsString(int row) {
         Cell[] rowCells = new Cell[width];

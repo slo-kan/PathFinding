@@ -50,13 +50,14 @@ public class Transporter extends Node {
             source = destination;
             destination = this.traStations.get(index % traStations.size());
             this.location = source.location;
+            index++;
 
             this.wait = shouldWait();
 
             if (this.wait && source.getType() == Station.Type.MANUFACTURE) {
                 this.items = this.items + source.items;
                 source.items = 0;
-                index++;
+                //index++;
             }
 
         } else if (!wait || (currentlyWaited >= waitTime)) {
@@ -64,7 +65,7 @@ public class Transporter extends Node {
             if (this.wait && (source.getType() == Station.Type.DELIVER)) {
                 source.deliver(this.items);
                 this.items = 0;
-                index++;
+                //index++;
             }
 
             currentlyWaited = 0;

@@ -4,23 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb3060fb-e1a6-4f11-bbe0-cbd8392a04f8" name="Changes" comment="jMetal tests">
+    <list default="true" id="cb3060fb-e1a6-4f11-bbe0-cbd8392a04f8" name="Changes" comment="improved visualization:&#10;number of items can be seen in JPanels">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scenario1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenario1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scenario2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenario2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenario3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scenario3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/path_finding/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/path_finding/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/path_finding/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/path_finding/Grid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/path_finding/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/path_finding/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/path_finding/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/path_finding/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/path_finding/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/path_finding/Station.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/path_finding/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/path_finding/PathFinder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/path_finding/Transporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/path_finding/Transporter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/path_finding/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/path_finding/Cell.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/path_finding/Grid.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/path_finding/Grid.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/path_finding/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/path_finding/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/path_finding/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/path_finding/Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/path_finding/Station$Type.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/path_finding/Station.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/path_finding/Station.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/path_finding/PathFinder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/path_finding/PathFinder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/path_finding/Transporter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/path_finding/Transporter.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +85,7 @@
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="path_finding.Main" />
       <module name="PathFinding" />
-      <option name="PROGRAM_PARAMETERS" value="scenario1.txt" />
+      <option name="PROGRAM_PARAMETERS" value="scenario2.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -191,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680600088629</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="improved visualization:&#10;number of items can be seen in JPanels">
+      <created>1681115132391</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681115132391</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -208,7 +211,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="basic visualization" />
     <MESSAGE value="jMetal tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="jMetal tests" />
+    <MESSAGE value="improved visualization:&#10;number of items can be seen in JPanels" />
+    <option name="LAST_COMMIT_MESSAGE" value="improved visualization:&#10;number of items can be seen in JPanels" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

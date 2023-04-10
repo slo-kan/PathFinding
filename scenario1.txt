@@ -1,5 +1,6 @@
-Size, 20, 20
-Time, 2000
-Station, man_1, 10, 18, 10
+Size, 15, 15
+Time, 300
+Station, man_1, 10, 9, 10
 Station, del_1, 2, 6
 Transporter, tra_1, 10, 10, man_1, del_1
+Transporter, tra_2, 9, 10, man_1, del_1
