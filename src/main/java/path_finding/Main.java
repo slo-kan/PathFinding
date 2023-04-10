@@ -49,7 +49,7 @@ public abstract class Main {
                         grid = new Grid(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
                     } else if ("Time".equals(tokens[0])) {
                         runTime = Integer.parseInt(tokens[1]);
-                    } else{
+                    } else if ("Station".equals(tokens[0]) || "Transporter".equals(tokens[0])){
                         String className =  "path_finding." + tokens[0];
                         String objectName = tokens[1];
                         String[] argsString = new String[tokens.length - 2];
@@ -94,7 +94,7 @@ public abstract class Main {
                         }
                         //Location loc = new Location(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
                         //genTime = Integer.parseInt(tokens[4]);
-                    }
+                    }else{ break;}
                 }
             }
 
@@ -109,9 +109,9 @@ public abstract class Main {
         for (Object obj : objects.values()) {
             if (obj instanceof Station) {
                 Station station = (Station) obj;
-                if(station.getType() == Station.Type.MANUFACTURE) {
+                if(station.getType() == Node.Type.MANUFACTURE) {
                     listManStations.add((Station) obj);
-                }else if (station.getType() == Station.Type.DELIVER) {
+                }else if (station.getType() == Node.Type.DELIVER) {
                     listDelStations.add((Station) obj);
                 }
             }else if (obj instanceof Transporter) {

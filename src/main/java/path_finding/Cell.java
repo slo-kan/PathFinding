@@ -26,6 +26,16 @@ public class Cell {
         return nodes.size();
     }
 
+    public List<Node> getNodes() {
+        return nodes;
+    }
+    public int numItems() {
+        int items = 0;
+        for(int i=0; i<nodes.size(); i++ ){
+            items += nodes.get(i).items;
+        }return items;
+    }
+
     public String print() {
         if (numNodes() == 0) {
             return "_";

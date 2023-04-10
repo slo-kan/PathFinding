@@ -1,6 +1,6 @@
 Size, 100, 100
 Time, 2000
-Station, man_1, 50, 90, 10
-Station, man_2, 30, 70, 5
+Station, man_1, 50, 90, 25
+Station, man_2, 75, 50, 15
 Station, del_1, 10, 30
 Transporter, tra_1, 50, 50, man_1, man_2, del_1

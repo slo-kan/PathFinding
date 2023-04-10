@@ -1,27 +1,29 @@
 package path_finding;
 
+import java.awt.*;
+
 public class Station extends Node {
     private int GENERATION_TIME = 0;
-    private String name;
 
-    private Type type;
 
     public Station(){
 
     }
     public Station(int x, int y) {
+        this.colour = Color.BLUE;
         this.type = Type.DELIVER;
         this.location = new Location(x,y);
+
     }
     public Station(int x, int y, int time) {
+        this.colour = Color.RED;
         this.type = Type.MANUFACTURE;
         this.location = new Location(x,y);
         this.GENERATION_TIME = time;
+
     }
 
-    public enum Type {
-        MANUFACTURE, DELIVER
-    }
+
 
     public Type getType() {
         return type;

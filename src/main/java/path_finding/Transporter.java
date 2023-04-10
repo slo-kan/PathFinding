@@ -1,9 +1,11 @@
 package path_finding;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Transporter extends Node {
+
 
     private int waitTime = 2;
 
@@ -17,12 +19,19 @@ public class Transporter extends Node {
 
     private int index =1;
     public Transporter() {
+        this.type = Type.TRANSPORTER;
     }
     public Transporter(int x, int y, List<Station> stations) {
+        this.colour = Color.GREEN;
+        this.type = Type.TRANSPORTER;
         this.location = new Location(x,y);
         this.traStations = stations;
         this.source = this.traStations.get(0);
         this.destination = this.traStations.get(0);
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public Station getDestination() {
