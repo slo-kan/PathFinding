@@ -12,11 +12,16 @@ public class Cell {
         this.nodes = nodes;
     }
 
+    private boolean isOccupied = false;
+
+
     public void addNode(Node node) {
+        if (node.getType() == Node.Type.TRANSPORTER){this.isOccupied=true;}
         this.nodes.add(node);
     }
 
     public void removeNode(Node node) {
+        if (node.getType() == Node.Type.TRANSPORTER){this.isOccupied=false;}
         nodes.remove(node);
     }
 
@@ -27,18 +32,32 @@ public class Cell {
     public List<Node> getNodes() {
         return nodes;
     }
+
+
+    public int traItems() {
+        int items = 0;
+        for (Node node : nodes) {
+            if(node.getType() == Node.Type.TRANSPORTER){ items = node.items;}
+        }
+        return items;
+    }
+    public int staItems() {
+        int items = 0;
+        for (Node node : nodes) {
+            if(node.getType() == Node.Type.MANUFACTURE || node.getType() == Node.Type.DELIVER){ items = node.items;}
+        }
+        return items;
+    }
+
     public int numItems() {
         int items = 0;
-        for(int i=0; i<nodes.size(); i++ ){
-            items += nodes.get(i).items;
-        }return items;
+        for (Node node : nodes) {
+            items += node.items;
+        }
+        return items;
     }
     public boolean notOccupied(){
-        boolean occupied = false;
-        for (Node node:this.nodes){
-            if(node.getType() == Node.Type.TRANSPORTER){ occupied = true;}
-            else{occupied = false;}
-        }return !occupied;
+        return !this.isOccupied;
     }
 
     public String print() {

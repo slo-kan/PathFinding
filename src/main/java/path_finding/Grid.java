@@ -10,28 +10,23 @@ public class Grid {
     Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     double screenWidth = screenRes.getWidth();
     double screenHeight = screenRes.getHeight();
-    private int width;
-    private int height;
-
-    private int pixels = 15;
+    private final int width;
+    private final int height;
+    private static int pixels;
     public Cell[][] cells;
-    private JPanel[][] st_panels;
-    private JLabel[][] st_labels;
-
-    private JPanel[][] tr_panels;
-    private JLabel[][] tr_labels;
-
-    private boolean canRemove;
-
-    private static final List<Location> st_locations = new ArrayList();
-    private static final List<Location> tr_locations = new ArrayList();
+    private static JPanel[][] st_panels;
+    private static  JLabel[][] st_labels;
+    private static JPanel[][] tr_panels;
+    private static JLabel[][] tr_labels;
+    private static final List<Location> st_locations = new ArrayList<>();
+    private static final List<Location> tr_locations = new ArrayList<>();
 
     //private List<Cell> cellsList = new ArrayList<>();
 
     //private List<JPanel> panelsList = new ArrayList<>();
 
     //private List<JLabel> labelsList = new ArrayList<>();
-    JFrame frame = new JFrame();
+    JFrame frame = new JFrame("PathFinding");
 
     public Grid(int width, int height) {
         this.height = height;
@@ -44,7 +39,7 @@ public class Grid {
         tr_labels = new JLabel[width][height];
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
-        frame.setSize(width*pixels,height*pixels);
+        //frame.setSize(width*pixels,height*pixels);
         frame.setBackground(Color.black);
         frame.setVisible(true);
         //frame.setResizable(false);
@@ -96,11 +91,9 @@ public class Grid {
 
     public void addNode(Node node) {
 
-        cells[node.location.getX()][node.location.getY()].addNode(node);
+        cells[node.location.x()][node.location.y()].addNode(node);
 
-
-
-        Location location = new Location(node.location.getX(), node.location.getY());
+        Location location = new Location(node.location.x(), node.location.y());
 
         //cellsList.add(cells[node.location.getX()][node.location.getY()]);
         //panelsList.add(panels[node.location.getX()][node.location.getY()]);
@@ -108,58 +101,52 @@ public class Grid {
 
         if(node.getType() == Node.Type.MANUFACTURE || node.type == Node.Type.DELIVER) {
             st_locations.add(location);
-            st_panels[node.location.getX()][node.location.getY()] = new JPanel();
-            st_labels[node.location.getX()][node.location.getY()] = new JLabel();
-            st_panels[node.location.getX()][node.location.getY()].setBounds((node.location.getX()-1)*pixels, (node.location.getY()-1)*pixels, pixels*3, pixels*3);
-            st_panels[node.location.getX()][node.location.getY()].setBackground(node.colour);
-            frame.add(st_panels[node.location.getX()][node.location.getY()]);
+            if(st_panels[node.location.x()][node.location.y()] == null){st_panels[node.location.x()][node.location.y()] = new JPanel();}
+            if(st_labels[node.location.x()][node.location.y()] == null){st_labels[node.location.x()][node.location.y()] = new JLabel();}
+
+            st_panels[node.location.x()][node.location.y()].setBounds((node.location.x()-1)*pixels, (node.location.y()-1)*pixels, pixels*3, pixels*3);
+            st_panels[node.location.x()][node.location.y()].setBackground(node.colour);
+            //st_panels[node.location.getX()][node.location.getY()].setOpaque(false);
+            frame.add(st_panels[node.location.x()][node.location.y()]);
         }else if(node.type == Node.Type.TRANSPORTER) {
             tr_locations.add(location);
-            tr_panels[node.location.getX()][node.location.getY()] = new JPanel();
-            tr_labels[node.location.getX()][node.location.getY()] = new JLabel();
-            tr_panels[node.location.getX()][node.location.getY()].setBounds(node.location.getX()*pixels, node.location.getY()*pixels, pixels, pixels);
-            tr_panels[node.location.getX()][node.location.getY()].setBackground(node.colour);
-            frame.add(tr_panels[node.location.getX()][node.location.getY()]);
+            if(tr_panels[node.location.x()][node.location.y()] == null){tr_panels[node.location.x()][node.location.y()] = new JPanel();}
+            if(tr_labels[node.location.x()][node.location.y()] == null){tr_labels[node.location.x()][node.location.y()] = new JLabel();}
+
+            tr_panels[node.location.x()][node.location.y()].setBounds(node.location.x()*pixels, node.location.y()*pixels, pixels, pixels);
+            tr_panels[node.location.x()][node.location.y()].setBackground(node.colour);
+            frame.add(tr_panels[node.location.x()][node.location.y()]);
+
+            /*
+            if(node.curLocation!= null) {
+                tr_panels[node.curLocation.getX()][node.curLocation.getY()].setBackground(new Color(0,255,0));
+                frame.add(tr_panels[node.curLocation.getX()][node.curLocation.getY()]);
+            }*/
+
+
         }
-        String items = "";
+        String items;
 
-        // iterate through list of locations of stations
+        // iterate through list of locations of stations to update number of items
         if(!st_locations.isEmpty()) {
-            for (int i = 0; i < st_locations.size(); i++) {
+            for (Location loc : st_locations) {
+                items = Integer.toString(cells[loc.x()][loc.y()].staItems());
+                addLabel(st_panels[loc.x()][loc.y()],st_labels[loc.x()][loc.y()], items, pixels);
+                st_labels[loc.x()][loc.y()].setBorder(BorderFactory.createEmptyBorder( pixels/2 /*top*/, 0, 0, 0 ));
 
-                items = Integer.toString(cells[st_locations.get(i).getX()][st_locations.get(i).getY()].numItems());
-
-                st_labels[st_locations.get(i).getX()][st_locations.get(i).getY()].setText(items);
-
-                st_labels[st_locations.get(i).getX()][st_locations.get(i).getY()].setHorizontalAlignment(JLabel.CENTER);
-                st_labels[st_locations.get(i).getX()][st_locations.get(i).getY()].setVerticalAlignment(JLabel.CENTER);
-                st_labels[st_locations.get(i).getX()][st_locations.get(i).getY()].setForeground(Color.white);
-                st_labels[st_locations.get(i).getX()][st_locations.get(i).getY()].setFont(new Font("Courier", Font.BOLD, pixels));
-
-                st_panels[st_locations.get(i).getX()][st_locations.get(i).getY()].add(st_labels[st_locations.get(i).getX()][st_locations.get(i).getY()]);
             }
         }
 
-        // iterate through list of locations of transporters
-
+        // iterate through list of locations of transporters to update number of items
         if(!tr_locations.isEmpty()) {
-            for (int i = 0; i < tr_locations.size(); i++) {
-
-                items = Integer.toString(cells[tr_locations.get(i).getX()][tr_locations.get(i).getY()].numItems());
-
-                tr_labels[tr_locations.get(i).getX()][tr_locations.get(i).getY()].setText(items);
-
-                st_labels[st_locations.get(i).getX()][st_locations.get(i).getY()].setHorizontalAlignment(JLabel.LEFT);
-                st_labels[st_locations.get(i).getX()][st_locations.get(i).getY()].setVerticalAlignment(JLabel.TOP);
-                tr_labels[tr_locations.get(i).getX()][tr_locations.get(i).getY()].setForeground(Color.white);
-                tr_labels[tr_locations.get(i).getX()][tr_locations.get(i).getY()].setFont(new Font("Courier", Font.BOLD, pixels));
-                //tr_labels[tr_locations.get(i).getX()][tr_locations.get(i).getY()].setBounds(0, 0, pixels, pixels);
-
-                tr_panels[tr_locations.get(i).getX()][tr_locations.get(i).getY()].add(tr_labels[tr_locations.get(i).getX()][tr_locations.get(i).getY()], BorderLayout.NORTH);
+            for (Location loc : tr_locations) {
+                items = Integer.toString(cells[loc.x()][loc.y()].traItems());
+                addLabel(tr_panels[loc.x()][loc.y()],tr_labels[loc.x()][loc.y()], items, pixels/2);
             }
         }
 
         frame.revalidate();
+
 
     }
 
@@ -168,16 +155,46 @@ public class Grid {
         //cellsList.remove(cells[node.location.getX()][node.location.getY()]);
         //panelsList.remove(panels[node.location.getX()][node.location.getY()]);
         //labelsList.remove(labels[node.location.getX()][node.location.getY()]);
-        Location location = new Location(node.location.getX(), node.location.getY());
 
-        tr_locations.remove(location);
+        node.curLocation = new Location(node.location.x(), node.location.y());
+        tr_locations.remove(node.curLocation);
+        //frame.remove(tr_panels[node.location.getX()][node.location.getY()]);
 
-        frame.remove(tr_panels[node.location.getX()][node.location.getY()]);
+        tr_panels[node.curLocation.x()][node.curLocation.y()].remove(tr_labels[node.curLocation.x()][node.curLocation.y()]);
+        tr_panels[node.curLocation.x()][node.curLocation.y()].setBackground(new Color(255, 255, 255, 255));
+        if(node.preLocation.x() < node.curLocation.x()) {
+            addLabel(tr_panels[node.curLocation.x()][node.curLocation.y()], tr_labels[node.curLocation.x()][node.curLocation.y()], "→", pixels/2);
+        }else if (node.preLocation.x() > node.curLocation.x()) {
+            addLabel(tr_panels[node.curLocation.x()][node.curLocation.y()], tr_labels[node.curLocation.x()][node.curLocation.y()], "←", pixels/2);
+        }else{
+            if(node.preLocation.y() < node.curLocation.y()) {
+                addLabel(tr_panels[node.curLocation.x()][node.curLocation.y()], tr_labels[node.curLocation.x()][node.curLocation.y()], "↓", pixels/2);
+            }else if (node.preLocation.y() > node.curLocation.y()) {
+                addLabel(tr_panels[node.curLocation.x()][node.curLocation.y()], tr_labels[node.curLocation.x()][node.curLocation.y()], "↑", pixels/2);
+        }
+        }
+        //frame.add(tr_panels[node.location.getX()][node.location.getY()]);
         frame.repaint();
-
-        cells[node.location.getX()][node.location.getY()].removeNode(node);
+        cells[node.curLocation.x()][node.curLocation.y()].removeNode(node);
+        node.preLocation = node.curLocation;
     }
 
+    static private void addLabel(JPanel panel,JLabel label, String text, int size){
+
+        label.setText(text);
+
+        //label.setHorizontalAlignment(JLabel.LEFT);
+        //label.setVerticalAlignment(JLabel.TOP);
+
+        label.setForeground(new Color(0, 0, 0, 255));
+        //label.setForeground(new Color(255,255,255));
+        label.setFont(new Font("Courier", Font.BOLD, size));
+        label.setBorder(BorderFactory.createEmptyBorder( -1*size/4 /*top*/, 0, 0, 0 ));
+
+        //label.setBounds(0, 0, size, size);
+
+        panel.add(label);
+    }
 
 
     public String getRowAsString(int row) {

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+
 public abstract class Main {
 
 
@@ -132,12 +133,12 @@ public abstract class Main {
         //grid.addNode(del);
         //grid.addNode(transporter);
 
-        FileWriter file = new FileWriter(fileName, true);
+        FileWriter file = new FileWriter("Output.txt");
         PrintWriter out = new PrintWriter(file, true);
         //out.println("Printing Grid");
         //out.println(grid.print());
         while (true) {
-            TimeUnit.MILLISECONDS.sleep(1000);
+            TimeUnit.MILLISECONDS.sleep(100);
             evolveGrid(grid);
             //out.println(grid.print());
             //System.out.println(grid.print());
@@ -170,14 +171,13 @@ public abstract class Main {
         }
         for (Transporter transporter : Main.listTransporters) {
             Location newLocation = pathfinder.getNextLocation(transporter.location, transporter.getDestination().location);
-            if (grid.cells[newLocation.getX()][newLocation.getY()].notOccupied()){
+            if (!newLocation.equals(transporter.getDestination().location) || !transporter.getDestination().isOccupied){
                 grid.removeNode(transporter);
                 transporter.setLocation(newLocation);
                 grid.addNode(transporter);
             }
         }
     }
-
 
     /*
     private static Location getRandomLocation() {

@@ -62,7 +62,7 @@ public class TestExecutor
 
         List<IntegerSolution> resultPopulation = algorithm.getResult();
 
-        System.out.println("--- Completed Test Experiment, in seconds: " + computingTimeSeconds + "---");
+        System.out.println("--- Completed Test Experiment, in seconds:" + computingTimeSeconds + " ---");
 
         System.out.println("Results: ...");
         for (IntegerSolution current : resultPopulation)

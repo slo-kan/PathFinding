@@ -68,7 +68,7 @@ public class Test
 
         List<DoubleSolution> population = algorithm.getResult();
 
-        System.out.println("--- Completed JMetal Test, in seconds: " + computingTimeSeconds + "---");
+        System.out.println("--- Completed JMetal Test, in seconds:" + computingTimeSeconds + " ---");
     }
 
     public static void main(String[] args){

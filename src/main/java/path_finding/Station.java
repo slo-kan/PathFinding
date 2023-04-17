@@ -5,24 +5,23 @@ import java.awt.*;
 public class Station extends Node {
     private int GENERATION_TIME = 0;
 
-
+    public boolean isOccupied = false;
     public Station(){
 
     }
     public Station(int x, int y) {
-        this.colour = Color.BLUE;
+        this.colour = new Color(111,216,255);
         this.type = Type.DELIVER;
         this.location = new Location(x,y);
 
     }
     public Station(int x, int y, int time) {
-        this.colour = Color.RED;
+        this.colour = new Color(255,90,111);
         this.type = Type.MANUFACTURE;
         this.location = new Location(x,y);
         this.GENERATION_TIME = time;
 
     }
-
 
 
     public Type getType() {
@@ -33,6 +32,7 @@ public class Station extends Node {
         return GENERATION_TIME;
     }
 
+    public Location getLocation(){return this.location;}
     /*@Override
     public String toString() {
         return type.name();

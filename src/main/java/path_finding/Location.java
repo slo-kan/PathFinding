@@ -1,21 +1,6 @@
 package path_finding;
 
-public class Location {
-    private int x;
-    private int y;
-
-    public Location(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
+public record Location(int x, int y) {
 
     public Location moveDelta(int deltaX, int deltaY) {
         return new Location(x + deltaX, y + deltaY);
@@ -23,7 +8,7 @@ public class Location {
 
     @Override
     public String toString() {
-        return "(" + getX() + ", " + getY() + ")";
+        return "(" + x() + ", " + y() + ")";
     }
 
     @Override
