@@ -9,8 +9,5 @@
         <module name="PathFinding" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="PathFinding" target="19" />
-    </bytecodeTargetLevel>
   </component>
 </project>
