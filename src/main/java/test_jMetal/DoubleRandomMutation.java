@@ -1,23 +1,23 @@
 package test_jMetal;
 
 import org.uma.jmetal.operator.mutation.MutationOperator;
-import org.uma.jmetal.solution.integersolution.IntegerSolution;
+import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 
 import java.util.Random;
 
-public class RandomMutation implements MutationOperator<IntegerSolution>
+public class DoubleRandomMutation implements MutationOperator<DoubleSolution>
 {
 
-    private double mutationProbability =  1.0;
+    private double mutationProbability = 1.0;
 
-    public RandomMutation(double mutationProbability)
+    public DoubleRandomMutation(double mutationProbability)
     {
         this.mutationProbability = mutationProbability;
     }
 
     Random random = new Random();
     @Override
-    public IntegerSolution execute(IntegerSolution solution)
+    public DoubleSolution execute(DoubleSolution solution)
     {
         //Important: Do not create a copy and modify the copy!
         //JMetal internally doesn't use the return value! It relies on the input object to be modified!
@@ -26,9 +26,9 @@ public class RandomMutation implements MutationOperator<IntegerSolution>
         {
             if (Math.random() < mutationProbability) continue;
 
-            int lowerBound = solution.getBounds(i).getLowerBound();
-            int upperBound = solution.getBounds(i).getUpperBound();
-            solution.variables().set(i,(int)(lowerBound + (upperBound - lowerBound)*Math.random()));
+            double lowerBound = solution.getBounds(i).getLowerBound();
+            double upperBound = solution.getBounds(i).getUpperBound();
+            solution.variables().set(i, (lowerBound + (upperBound - lowerBound)*Math.random()));
         }
 
         return solution;

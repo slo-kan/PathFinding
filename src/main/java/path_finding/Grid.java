@@ -99,7 +99,7 @@ public class Grid {
         //panelsList.add(panels[node.location.getX()][node.location.getY()]);
         //labelsList.add(labels[node.location.getX()][node.location.getY()]);
 
-        if(node.getType() == Node.Type.MANUFACTURE || node.type == Node.Type.DELIVER) {
+        if(node.getType() == Node.Type.STATION) {
             st_locations.add(location);
             if(st_panels[node.location.x()][node.location.y()] == null){st_panels[node.location.x()][node.location.y()] = new JPanel();}
             if(st_labels[node.location.x()][node.location.y()] == null){st_labels[node.location.x()][node.location.y()] = new JLabel();}

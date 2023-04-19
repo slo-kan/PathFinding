@@ -75,7 +75,7 @@ public class Transporter extends Node {
 
             this.wait = shouldWait();
 
-            if (this.wait && source.getType() == Station.Type.MANUFACTURE) {
+            if (this.wait && source.getStationType() == Station.StationType.MANUFACTURE) {
                 this.items = this.items + source.items;
                 source.items = 0;
                 //index++;
@@ -84,7 +84,7 @@ public class Transporter extends Node {
         } else if (!wait || (currentlyWaited >= waitTime)) {
             this.location = location;
             this.source.isOccupied = false;
-            if (this.wait && (source.getType() == Station.Type.DELIVER)) {
+            if (this.wait && (source.getStationType() == Station.StationType.DELIVER)) {
                 source.deliver(this.items);
                 this.items = 0;
                 //index++;
@@ -99,7 +99,7 @@ public class Transporter extends Node {
     }
 
     private boolean shouldWait() {
-        if (source.getType() == Station.Type.MANUFACTURE) {
+        if (source.getStationType() == Station.StationType.MANUFACTURE) {
             return source.items > 0;
         } else {
             return this.items > 0;

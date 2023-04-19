@@ -110,11 +110,10 @@ public abstract class Main {
         //}
 
         for (Object obj : objects.values()) {
-            if (obj instanceof Station) {
-                Station station = (Station) obj;
-                if(station.getType() == Node.Type.MANUFACTURE) {
+            if (obj instanceof Station station) {
+                if(station.getStationType() == Station.StationType.MANUFACTURE) {
                     listManStations.add((Station) obj);
-                }else if (station.getType() == Node.Type.DELIVER) {
+                }else if (station.getStationType() == Station.StationType.DELIVER) {
                     listDelStations.add((Station) obj);
                 }
             }else if (obj instanceof Transporter) {

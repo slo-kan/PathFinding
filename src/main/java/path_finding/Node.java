@@ -13,7 +13,7 @@ public abstract class Node {
     protected Color  colour ;
 
     public enum Type {
-        MANUFACTURE, DELIVER, TRANSPORTER
+        STATION, TRANSPORTER
     }
 
     public Type getType() {

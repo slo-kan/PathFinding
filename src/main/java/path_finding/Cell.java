@@ -44,7 +44,7 @@ public class Cell {
     public int staItems() {
         int items = 0;
         for (Node node : nodes) {
-            if(node.getType() == Node.Type.MANUFACTURE || node.getType() == Node.Type.DELIVER){ items = node.items;}
+            if(node.getType() == Node.Type.STATION){ items = node.items;}
         }
         return items;
     }
